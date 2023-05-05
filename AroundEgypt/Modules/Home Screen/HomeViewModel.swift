@@ -31,9 +31,9 @@ class HomeViewModel: BaseViewModel {
 
     private var cancellables: [AnyCancellable] = []
     private let stateDidUpdateSubject = PassthroughSubject<HomeViewModelState, Never>()
-    @Published var recommendedExperiencesList: [HomeModel.Datum] = []
-    @Published var recentExperiencesList: [HomeModel.Datum] = []
-    @Published var searchExperiencesList: [HomeModel.Datum] = []
+    @Published var recommendedExperiencesList: [ExperienceDetailsModel] = []
+    @Published var recentExperiencesList: [ExperienceDetailsModel] = []
+    @Published var searchExperiencesList: [ExperienceDetailsModel] = []
 
     public private(set) var hasNext: Bool = false
     private var page = 1
@@ -258,7 +258,7 @@ extension HomeViewModel {
     
     
     //MARK: recommended experiences
-    func fetchRecommendedExperience(at index: Int) -> HomeModel.Datum? {
+    func fetchRecommendedExperience(at index: Int) -> ExperienceDetailsModel? {
         if recommendedExperiencesList.indices.contains(index) {
             return recommendedExperiencesList[index]
         }
@@ -271,7 +271,7 @@ extension HomeViewModel {
     }
     
     //MARK: recent experiences
-    func fetchRecentExperience(at index: Int) -> HomeModel.Datum? {
+    func fetchRecentExperience(at index: Int) -> ExperienceDetailsModel? {
         if recentExperiencesList.indices.contains(index) {
             return recentExperiencesList[index]
         }
@@ -285,7 +285,7 @@ extension HomeViewModel {
     
     
     //MARK: search experiences
-    func fetchSearchExperience(at index: Int) -> HomeModel.Datum? {
+    func fetchSearchExperience(at index: Int) -> ExperienceDetailsModel? {
         if searchExperiencesList.indices.contains(index) {
             return searchExperiencesList[index]
         }
