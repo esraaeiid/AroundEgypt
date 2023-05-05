@@ -9,9 +9,11 @@ import Combine
 import Foundation
 
 struct Request {
-    static let baseURL = "aroundegypt.34ml.com"
+    static let baseURL = "https://aroundegypt.34ml.com"
     
     var headers: [String: String]?
+    var method: String = Methods.get.value
+    
     
     let url: URL
     var request: URLRequest? {
@@ -37,9 +39,18 @@ struct Request {
     }
     
     //MARK: Methods
-    enum Methods: String {
-        case get = "GET"
-        case post = "POST"
+    enum Methods {
+        case get
+        case post
+        
+        var value: String {
+            switch self {
+            case .get:
+                return "GET"
+            case .post:
+                return "POST"
+            }
+        }
     }
     
 

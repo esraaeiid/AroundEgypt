@@ -44,14 +44,15 @@ class APIClient: APIClientType{
            return  .just(.failure(.networkError))
         }
         
+        requestedURL.httpMethod = request.method
+        
         if let headers = request.headers {
             for (key, value) in headers {
                 requestedURL.setValue(key, forHTTPHeaderField: value)
             }
         }
         
-     
-        
+    
         return URLSession.shared.dataTaskPublisher(for: requestedURL)
         .map(\.data)
         .decode(type: T.self, decoder: JSONDecoder())

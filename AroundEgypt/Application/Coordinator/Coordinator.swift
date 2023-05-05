@@ -13,7 +13,7 @@ class Coordinator: NSObject {
     
     
     func restart(){
-        let scene = ViewController()
+        let scene = HomeViewController()
         let delegate = UIApplication.shared.delegate as? AppDelegate
         delegate?.window = UIWindow()
         delegate?.window?.rootViewController = scene
