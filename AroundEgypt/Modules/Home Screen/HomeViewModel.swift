@@ -9,7 +9,11 @@ import Foundation
 import Combine
 
 protocol HomeViewModelType {
-    func requestExperience()
+    func recommendedExperiencesRequest()
+    func recentExperiencesRequest()
+    func searchExperiencesRequest(with title: String)
+    func likeExperienceRequest(with id: String)
+    func singleExperienceRequest(with id: String)
 }
 
 /// define all states of view.
@@ -27,7 +31,9 @@ class HomeViewModel: BaseViewModel {
 
     private var cancellables: [AnyCancellable] = []
     private let stateDidUpdateSubject = PassthroughSubject<HomeViewModelState, Never>()
-    @Published var experiences: [ExperienceModel.Datum] = []
+    @Published var recommendedExperiencesList: [HomeModel.Datum] = []
+    @Published var recentExperiencesList: [HomeModel.Datum] = []
+    @Published var searchExperiencesList: [HomeModel.Datum] = []
 
     public private(set) var hasNext: Bool = false
     private var page = 1
@@ -43,27 +49,27 @@ class HomeViewModel: BaseViewModel {
 
 extension HomeViewModel: HomeViewModelType {
     
-    func requestExperience(){
+    func singleExperienceRequest(with id: String) {
         guard let viewModelUseCase = self.useCase as? HomeUseCaseType else { return }
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
         self.isLoading = true
         
-        var request = Request.experiencesRequest()
+        var request = Request.singleExperienceRequest(with: id)
         request.method = Request.Methods.get.value
         
-        viewModelUseCase.request(request)
+        viewModelUseCase.requestExperience(request)
             .sink { [weak self] result in
                 guard let self = self else { return }
                 self.isLoading = false
                 switch result {
-                case .success(let experiences):
-            
-                    self.experiences += experiences.data
-                    print("count⏺", self.experiences.count)
+                case .success(let experience):
+                    
+//                    self.recentExperiencesList += experiences.data
+//                    print("count⏺", self.recentExperiencesList.count)
                     self.stateDidUpdateSubject.send(.show(true))
                     
-
+                    
                     
                 case .failure(let error):
                     switch error {
@@ -73,12 +79,175 @@ extension HomeViewModel: HomeViewModelType {
                         self.stateDidUpdateSubject.send(.error(errorDescription))
                     case .unknown(let errorDescription):
                         self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .parameterEncodingError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
                     }
                     
                 }
             }.store(in: &cancellables)
     }
     
+    
+    //MARK: recommended experiences
+    func recommendedExperiencesRequest() {
+        guard let viewModelUseCase = self.useCase as? HomeUseCaseType else { return }
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
+        self.isLoading = true
+        
+        var request = Request.experiencesRequest()
+        request.method = Request.Methods.get.value
+        request.param = ["filter[recommended]" : true]
+        
+        viewModelUseCase.requestHome(request)
+            .sink { [weak self] result in
+                guard let self = self else { return }
+                self.isLoading = false
+                switch result {
+                case .success(let experiences):
+                    
+                    self.recommendedExperiencesList += experiences.data ?? []
+                    print("count⏺", self.recommendedExperiencesList.count)
+                    self.stateDidUpdateSubject.send(.show(true))
+                    
+                    
+                    
+                case .failure(let error):
+                    switch error {
+                    case .networkError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    case .requestError(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .unknown(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .parameterEncodingError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    }
+                    
+                }
+            }.store(in: &cancellables)
+    }
+    
+    //MARK: recent experiences
+    func recentExperiencesRequest() {
+        guard let viewModelUseCase = self.useCase as? HomeUseCaseType else { return }
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
+        self.isLoading = true
+        
+        var request = Request.experiencesRequest()
+        request.method = Request.Methods.get.value
+        
+        viewModelUseCase.requestHome(request)
+            .sink { [weak self] result in
+                guard let self = self else { return }
+                self.isLoading = false
+                switch result {
+                case .success(let experiences):
+                    
+                    self.recentExperiencesList += experiences.data ?? []
+                    print("count⏺", self.recentExperiencesList.count)
+                    self.stateDidUpdateSubject.send(.show(true))
+                    
+                    
+                    
+                case .failure(let error):
+                    switch error {
+                    case .networkError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    case .requestError(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .unknown(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .parameterEncodingError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    }
+                    
+                }
+            }.store(in: &cancellables)
+    }
+    
+    //MARK: search experiences
+    func searchExperiencesRequest(with title: String) {
+        guard let viewModelUseCase = self.useCase as? HomeUseCaseType else { return }
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
+        self.isLoading = true
+        
+        var request = Request.experiencesRequest()
+        request.method = Request.Methods.get.value
+        request.param = ["filter[title]" : title ]
+        
+        viewModelUseCase.requestHome(request)
+            .sink { [weak self] result in
+                guard let self = self else { return }
+                self.isLoading = false
+                switch result {
+                case .success(let experiences):
+                    
+                    self.searchExperiencesList += experiences.data ?? []
+                    print("count⏺", self.searchExperiencesList.count)
+                    self.stateDidUpdateSubject.send(.show(true))
+                    
+                    
+                    
+                case .failure(let error):
+                    switch error {
+                    case .networkError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    case .requestError(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .unknown(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .parameterEncodingError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    }
+                    
+                }
+            }.store(in: &cancellables)
+    }
+    
+    
+    //MARK: like experiences
+    func likeExperienceRequest(with id: String) {
+        guard let viewModelUseCase = self.useCase as? HomeUseCaseType else { return }
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
+        self.isLoading = true
+        
+        var request = Request.likeExperienceRequest(with: id)
+        request.method = Request.Methods.post.value
+        
+        viewModelUseCase.requestExperience(request)
+            .sink { [weak self] result in
+                guard let self = self else { return }
+                self.isLoading = false
+                switch result {
+                case .success(let experience):
+                    
+//                    self.recentExperiencesList += experiences.data
+//                    print("count⏺", self.recentExperiencesList.count)
+                    self.stateDidUpdateSubject.send(.show(true))
+                    
+                    
+                    
+                case .failure(let error):
+                    switch error {
+                    case .networkError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    case .requestError(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .unknown(let errorDescription):
+                        self.stateDidUpdateSubject.send(.error(errorDescription))
+                    case .parameterEncodingError:
+                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
+                    }
+                    
+                }
+            }.store(in: &cancellables)
+    }
+    
+        
     
 }
 
@@ -88,18 +257,48 @@ extension HomeViewModel: HomeViewModelType {
 extension HomeViewModel {
     
     
-    //MARK: fetching experiences
-    func fetchExperience(at index: Int) -> ExperienceModel.Datum? {
-        if experiences.indices.contains(index) {
-            return experiences[index]
+    //MARK: recommended experiences
+    func fetchRecommendedExperience(at index: Int) -> HomeModel.Datum? {
+        if recommendedExperiencesList.indices.contains(index) {
+            return recommendedExperiencesList[index]
         }
         return nil
     }
    
     
-    func getExperiencesCount() -> Int {
-        return experiences.count
+    func getRecommendedExperiencesCount() -> Int {
+        return recommendedExperiencesList.count
     }
+    
+    //MARK: recent experiences
+    func fetchRecentExperience(at index: Int) -> HomeModel.Datum? {
+        if recentExperiencesList.indices.contains(index) {
+            return recentExperiencesList[index]
+        }
+        return nil
+    }
+   
+    
+    func getRecentExperiencesCount() -> Int {
+        return recentExperiencesList.count
+    }
+    
+    
+    //MARK: search experiences
+    func fetchSearchExperience(at index: Int) -> HomeModel.Datum? {
+        if searchExperiencesList.indices.contains(index) {
+            return searchExperiencesList[index]
+        }
+        return nil
+    }
+   
+    
+    func getSearchExperiencesCount() -> Int {
+        return searchExperiencesList.count
+    }
+    
+    
+    //MARK: like experiences
     
 
 }

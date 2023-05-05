@@ -37,6 +37,7 @@
 		F1E019B92A0557FD001B11D6 /* ExperienceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019B82A0557FD001B11D6 /* ExperienceViewModel.swift */; };
 		F1E019BB2A05587A001B11D6 /* ExperienceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019BA2A05587A001B11D6 /* ExperienceCell.swift */; };
 		F1E019BD2A055C41001B11D6 /* ExperienceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019BC2A055C41001B11D6 /* ExperienceScreen.swift */; };
+		F1E019BF2A05961D001B11D6 /* ParameterEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019BE2A05961D001B11D6 /* ParameterEncodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		F1E019B82A0557FD001B11D6 /* ExperienceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceViewModel.swift; sourceTree = "<group>"; };
 		F1E019BA2A05587A001B11D6 /* ExperienceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceCell.swift; sourceTree = "<group>"; };
 		F1E019BC2A055C41001B11D6 /* ExperienceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceScreen.swift; sourceTree = "<group>"; };
+		F1E019BE2A05961D001B11D6 /* ParameterEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				F1E019932A053B8E001B11D6 /* Request.swift */,
 				F1E019952A053BA0001B11D6 /* Publisher.swift */,
 				F1E019972A053BCC001B11D6 /* Reachability.swift */,
+				F1E019BE2A05961D001B11D6 /* ParameterEncodable.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				F1E019A22A0555E1001B11D6 /* UIView+UIStackView+Constraints.swift in Sources */,
 				F1E019B92A0557FD001B11D6 /* ExperienceViewModel.swift in Sources */,
 				F1E019AD2A055756001B11D6 /* HomeView.swift in Sources */,
+				F1E019BF2A05961D001B11D6 /* ParameterEncodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

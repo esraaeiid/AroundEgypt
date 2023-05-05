@@ -12,6 +12,23 @@ enum APIError: Error {
     case networkError
     case requestError(String)
     case unknown(String)
+    case parameterEncodingError
+}
+
+public enum RequestCreationError: LocalizedError {
+
+    case invalidURL(Error? = nil, String? = "Invalid Url")
+    case parameterEncodingFailed(Error? = nil, String? = "Encoding Failed")
+    
+    public var errorDescription: String? {
+        switch self {
+        case .invalidURL(let underlyingError, let errorMessage):
+            return underlyingError?.localizedDescription ?? errorMessage
+        case .parameterEncodingFailed(let underlyingError, let errorMessage):
+            return underlyingError?.localizedDescription ?? errorMessage
+            
+        }
+    }
 }
 
 protocol APIClientType{
@@ -52,6 +69,29 @@ class APIClient: APIClientType{
             }
         }
         
+
+        
+        if let param = request.param {
+            switch request.method {
+            case "POST":
+                do {
+                    requestedURL = try JSONEncoding.default.encode(requestedURL, with: param)
+                } catch {
+                    return .just(.failure(APIError.parameterEncodingError))
+                }
+                
+            case "GET":
+                do {
+                    requestedURL = try URLEncoding.default.encode(requestedURL, with: param)
+                } catch {
+                    return .just(.failure(APIError.parameterEncodingError))
+                }
+                
+            default:
+                break
+                
+            }
+        }
     
         return URLSession.shared.dataTaskPublisher(for: requestedURL)
         .map(\.data)
@@ -80,5 +120,13 @@ class APIClient: APIClientType{
             
         })
         .eraseToAnyPublisher()
+    }
+}
+
+
+extension String {
+    var urlEncoded: String? {
+        let allowedCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "~-_."))
+        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)
     }
 }

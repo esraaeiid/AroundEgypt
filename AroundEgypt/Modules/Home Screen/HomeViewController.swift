@@ -29,7 +29,15 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         coordinator = .init()
         coordinator?.view = self
         
-        viewModel?.requestExperience()
+        //        viewModel?.recommendedExperiencesRequest()
+        //        viewModel?.recentExperiencesRequest()
+        
+        //        viewModel?.likeExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
+        //        viewModel?.likeExperienceRequest(with: "Nefertari")
+        //        viewModel?.singleExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
+        self.view.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tessst))
+        view.addGestureRecognizer(tap)
         bind()
     }
     
@@ -44,6 +52,9 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         view = homeView
     }
 
+    @objc func tessst(){
+        coordinator?.presentExperience(with: "")
+    }
     
     
     override func bind() {
@@ -63,9 +74,9 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         }.store(in: &cancellable)
         
         
-        viewModel?.$experiences.sink{  [weak self] exp in
+        viewModel?.$recommendedExperiencesList.sink{  [weak self] exp in
             guard let self = self else { return }
-            //reolad collectionView
+            //reload collectionView
         }.store(in: &cancellable)
     }
     

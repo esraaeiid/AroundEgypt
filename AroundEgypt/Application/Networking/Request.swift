@@ -8,17 +8,20 @@
 import Combine
 import Foundation
 
+
 struct Request {
     static let baseURL = "https://aroundegypt.34ml.com"
     
     var headers: [String: String]?
     var method: String = Methods.get.value
+    var param: [String: Any]?
     
     
     let url: URL
     var request: URLRequest? {
         return URLRequest(url: url)
     }
+    
     
     //MARK:  EndPoint
     enum EndPoint {
