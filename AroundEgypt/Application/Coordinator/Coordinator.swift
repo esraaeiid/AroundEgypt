@@ -16,7 +16,8 @@ class Coordinator: NSObject {
         let scene = HomeViewController()
         let delegate = UIApplication.shared.delegate as? AppDelegate
         delegate?.window = UIWindow()
-        delegate?.window?.rootViewController = scene
+        let nav = UINavigationController(rootViewController: scene)
+        delegate?.window?.rootViewController = nav
         delegate?.window?.makeKeyAndVisible()
     }
     

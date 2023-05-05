@@ -13,7 +13,6 @@ protocol HomeViewModelType {
     func recentExperiencesRequest()
     func searchExperiencesRequest(with title: String)
     func likeExperienceRequest(with id: String)
-    func singleExperienceRequest(with id: String)
 }
 
 /// define all states of view.
@@ -48,45 +47,6 @@ class HomeViewModel: BaseViewModel {
 //MARK: - Request
 
 extension HomeViewModel: HomeViewModelType {
-    
-    func singleExperienceRequest(with id: String) {
-        guard let viewModelUseCase = self.useCase as? HomeUseCaseType else { return }
-        cancellables.forEach { $0.cancel() }
-        cancellables.removeAll()
-        self.isLoading = true
-        
-        var request = Request.singleExperienceRequest(with: id)
-        request.method = Request.Methods.get.value
-        
-        viewModelUseCase.requestExperience(request)
-            .sink { [weak self] result in
-                guard let self = self else { return }
-                self.isLoading = false
-                switch result {
-                case .success(let experience):
-                    
-//                    self.recentExperiencesList += experiences.data
-//                    print("count⏺", self.recentExperiencesList.count)
-                    self.stateDidUpdateSubject.send(.show(true))
-                    
-                    
-                    
-                case .failure(let error):
-                    switch error {
-                    case .networkError:
-                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
-                    case .requestError(let errorDescription):
-                        self.stateDidUpdateSubject.send(.error(errorDescription))
-                    case .unknown(let errorDescription):
-                        self.stateDidUpdateSubject.send(.error(errorDescription))
-                    case .parameterEncodingError:
-                        self.stateDidUpdateSubject.send(.error(error.localizedDescription))
-                    }
-                    
-                }
-            }.store(in: &cancellables)
-    }
-    
     
     //MARK: recommended experiences
     func recommendedExperiencesRequest() {
