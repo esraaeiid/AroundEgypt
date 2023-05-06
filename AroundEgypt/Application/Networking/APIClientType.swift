@@ -63,6 +63,7 @@ class APIClient: APIClientType{
         
         requestedURL.httpMethod = request.method
         
+        
         if let headers = request.headers {
             for (key, value) in headers {
                 requestedURL.setValue(key, forHTTPHeaderField: value)

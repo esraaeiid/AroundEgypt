@@ -33,7 +33,7 @@ struct ExperienceModel: Codable {
                 return
             }
             throw DecodingError.typeMismatch(dataType.self, DecodingError.Context(codingPath: decoder.codingPath,
-                                                                                  debugDescription: "Wrong type for MyValue"))
+                                                                                  debugDescription: "Wrong type for dataType"))
             
         }
         

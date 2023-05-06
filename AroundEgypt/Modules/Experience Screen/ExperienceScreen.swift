@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct ExperienceScreen: View {
+    
+    //MARK: Vars
+    @StateObject var viewModel = ExperienceViewModel(useCase: ExperienceUseCase())
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(systemName: "photo")
+                .resizable()
+                .foregroundColor(.yellow)
+                .frame(width: 291, height: 291)
+        }
     }
 }
 

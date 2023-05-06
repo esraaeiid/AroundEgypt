@@ -20,7 +20,7 @@ enum ExperienceViewModelState {
 }
 
  
-class ExperienceViewModel: BaseViewModel {
+class ExperienceViewModel: BaseViewModel, ObservableObject {
     
     //MARK: Vars
     /// immutable `stateDidUpdate` property so that subscriber can only read from it.
@@ -29,8 +29,7 @@ class ExperienceViewModel: BaseViewModel {
     private var cancellables: [AnyCancellable] = []
     private let stateDidUpdateSubject = PassthroughSubject<ExperienceViewModelState, Never>()
     @Published var recommendedExperiencesList: [ExperienceDetailsModel] = []
-    @Published var recentExperiencesList: [ExperienceDetailsModel] = []
-    @Published var searchExperiencesList: [ExperienceDetailsModel] = []
+
 
     public private(set) var hasNext: Bool = false
     private var page = 1

@@ -28,6 +28,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         viewModel = HomeViewModel(useCase: HomeUseCase())
         coordinator = .init()
         coordinator?.view = self
+
         
         //        viewModel?.recommendedExperiencesRequest()
         //        viewModel?.recentExperiencesRequest()
