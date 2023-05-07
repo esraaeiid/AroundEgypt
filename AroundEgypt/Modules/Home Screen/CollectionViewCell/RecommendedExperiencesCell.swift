@@ -12,6 +12,7 @@ class RecommendedExperiencesCell: UICollectionViewCell {
     
     //MARK: Vars
     var viewModel: HomeViewModel?
+    var coordinator: HomeCoordinator?
     var cancellable: [AnyCancellable] = []
     
     // MARK: - Initializer
@@ -38,8 +39,7 @@ class RecommendedExperiencesCell: UICollectionViewCell {
     
     let cellView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
-        //UIColor(hexString: "#F5F5F5")
+        view.backgroundColor = UIColor(hexString: "#F5F5F5")
         view.contentMode = .scaleToFill
         view.layer.cornerRadius = 5
         view.layer.masksToBounds = true
@@ -114,7 +114,11 @@ extension RecommendedExperiencesCell : UICollectionViewDelegateFlowLayout, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-               
+        if let experience = self.viewModel?.fetchRecommendedExperience(at: indexPath.row),
+           let experienceID = experience.id {
+            coordinator?.presentExperience(with: experienceID)
+        }
+
     }
         
     

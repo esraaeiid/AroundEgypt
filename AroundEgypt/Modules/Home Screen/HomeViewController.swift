@@ -30,16 +30,10 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         viewModel = HomeViewModel(useCase: HomeUseCase())
         coordinator = .init()
         coordinator?.view = self
-
         
         viewModel?.recommendedExperiencesRequest()
         viewModel?.recentExperiencesRequest()
-        
-        //        viewModel?.singleExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
-        
-        self.view.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tessst))
-        view.addGestureRecognizer(tap)
+            
         bind()
     }
     
@@ -53,11 +47,6 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     
     override func loadView() {
         view = homeView
-    }
-
-    
-    @objc func tessst(){
-        coordinator?.presentExperience(with: "")
     }
     
     
@@ -118,6 +107,13 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     
     func setup(){
         
+        //navigationbar
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: homeView.menuImageView)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: homeView.filterImageView)
+        self.navigationItem.titleView = homeView.searchBar
+        homeView.searchBar.delegate = self
+        
+        
         //MARK:- mainCollectionView CollectionView
         homeView.mainCollectionView.delegate = self
         homeView.mainCollectionView.dataSource = self
@@ -132,6 +128,42 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     }
 
 
+}
+
+
+// MARK: - ... UISearchBarDelegate
+
+extension HomeViewController : UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        homeView.searchBar.setShowsCancelButton(false, animated: true)
+        homeView.searchBar.searchTextField.resignFirstResponder()
+        homaPresenation = .search
+        if let searchTitle = searchBar.searchTextField.text {
+            viewModel?.searchExperiencesRequest(with: searchTitle)
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        homeView.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        homeView.searchBar.setShowsCancelButton(false, animated: true)
+        homeView.searchBar.searchTextField.resignFirstResponder()
+        homaPresenation = .list
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty && homaPresenation == .search {
+            viewModel?.recommendedExperiencesRequest()
+            viewModel?.recentExperiencesRequest()
+            homeView.searchBar.setShowsCancelButton(false, animated: true)
+            homeView.searchBar.searchTextField.resignFirstResponder()
+            homaPresenation = .list
+        }
+    }
 }
 
 
@@ -203,6 +235,23 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        switch homaPresenation {
+            
+        case .search:
+            if let experience = self.viewModel?.fetchSearchExperience(at: indexPath.row),
+               let experienceID = experience.id {
+                coordinator?.presentExperience(with: experienceID)
+            }
+            
+        case .list:
+            if indexPath.section == HomeCellType.recents.rawValue {
+                if let experience = self.viewModel?.fetchRecentExperience(at: indexPath.row),
+                   let experienceID = experience.id {
+                    coordinator?.presentExperience(with: experienceID)
+                }
+
+            }
+        }
 
     }
         
@@ -214,7 +263,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
         case .search:
             let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
                                                                           withReuseId: ExperienceCell.CellId)
-            if let experience = self.viewModel?.fetchRecentExperience(at: indexPath.row) {
+            if let experience = self.viewModel?.fetchSearchExperience(at: indexPath.row) {
                 cell.bind(experience)
             }
             return cell
@@ -241,6 +290,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
                 }.store(in: &cancellable)
                 
                 cell.viewModel = viewModel
+                cell.coordinator = coordinator
                 return cell
                 
             } else {

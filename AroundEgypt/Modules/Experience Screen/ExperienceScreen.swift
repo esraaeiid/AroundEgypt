@@ -12,12 +12,16 @@ struct ExperienceScreen: View {
     //MARK: Vars
     @StateObject var viewModel = ExperienceViewModel(useCase: ExperienceUseCase())
     
+    //        viewModel?.singleExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
+
     var body: some View {
         VStack {
             Image(systemName: "photo")
                 .resizable()
                 .foregroundColor(.yellow)
-                .frame(width: 291, height: 291)
+                .frame(maxWidth: .infinity, maxHeight: 291)
+                .padding(0)
+            Spacer()
         }
     }
 }

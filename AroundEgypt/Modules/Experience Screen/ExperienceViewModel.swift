@@ -28,8 +28,8 @@ class ExperienceViewModel: BaseViewModel, ObservableObject {
 
     private var cancellables: [AnyCancellable] = []
     private let stateDidUpdateSubject = PassthroughSubject<ExperienceViewModelState, Never>()
-    @Published var recommendedExperiencesList: [ExperienceDetailsModel] = []
-
+    @Published var singleExperience: ExperienceModel?
+    @Published var isLiked: Bool = false
 
     public private(set) var hasNext: Bool = false
     private var page = 1
@@ -62,8 +62,7 @@ extension ExperienceViewModel: ExperienceViewModelType {
                 switch result {
                 case .success(let experience):
                     
-//                    self.recentExperiencesList += experiences.data
-//                    print("count⏺", self.recentExperiencesList.count)
+                    self.singleExperience = experience
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     
@@ -100,10 +99,9 @@ extension ExperienceViewModel: ExperienceViewModelType {
                 guard let self = self else { return }
                 self.isLoading = false
                 switch result {
-                case .success(let experience):
+                case .success(_):
                     
-//                    self.recentExperiencesList += experiences.data
-//                    print("count⏺", self.recentExperiencesList.count)
+                    self.isLiked = true
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     

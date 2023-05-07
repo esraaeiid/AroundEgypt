@@ -24,6 +24,28 @@ class HomeView: UIView {
     
     //MARK:  navigationController items
     
+    lazy var searchBar: UISearchBar = {
+        var searchBar = UISearchBar(frame: CGRectMake(0, 0, 150, 20))
+        searchBar.placeholder = "Try \"Luxor\""
+        searchBar.tintColor = .black
+        return searchBar
+    }()
+    
+    
+    var filterImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "filter"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 18, height: 14)
+        return imageView
+    }()
+    
+    var menuImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Menu"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 18, height: 12)
+        return imageView
+    }()
+    
     
 
    
