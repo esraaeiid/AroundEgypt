@@ -12,11 +12,9 @@ import Combine
 class ExperienceCell: UICollectionViewCell {
     
     //MARK: Cell Identifier
-    
     static let CellId = "ExperienceCellID"
     
     //MARK: Vars
-    
     var imageLoader: ImageLoader?
     var cancellable: [AnyCancellable] = []
     
@@ -75,6 +73,7 @@ class ExperienceCell: UICollectionViewCell {
     }
     
     
+   //MARK: bind function
     
     func bind(_ experience: ExperienceDetailsModel){
         

@@ -78,14 +78,8 @@ class HomeViewController: BaseViewController<HomeViewModel> {
             guard let self = self else { return }
             self.render(state)
         }.store(in: &cancellable)
-        
-        
-        viewModel?.$recommendedExperiencesList.sink{  [weak self] exp in
-            guard let self = self else { return }
-            self.homeView.mainCollectionView.reloadData()
-        }.store(in: &cancellable)
-        
-        
+
+            
         viewModel?.$recentExperiencesList.sink{  [weak self] exp in
             guard let self = self else { return }
             self.homeView.mainCollectionView.reloadData() //
@@ -225,6 +219,13 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
             } else if indexPath.section == HomeCellType.recommended.rawValue {
                 let cell: RecommendedExperiencesCell = collectionView.dequeueReusableCell(for: indexPath,
                                                                                           withReuseId: RecommendedExperiencesCell.CellId)
+                
+                viewModel?.$recommendedExperiencesList.sink{  [weak self] exp in
+                    guard let self = self else { return }
+                    cell.recommendedExperiencesCollectionView.reloadData()
+                }.store(in: &cancellable)
+                
+                cell.viewModel = viewModel
                 return cell
                 
             } else {

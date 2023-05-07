@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class RecommendedExperiencesCell: UICollectionViewCell {
+    
+    //MARK: Vars
+    var viewModel: HomeViewModel?
+    var cancellable: [AnyCancellable] = []
     
     // MARK: - Initializer
     
@@ -16,6 +21,7 @@ class RecommendedExperiencesCell: UICollectionViewCell {
         
         setupViews()
         setupCollectionView()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -97,9 +103,7 @@ class RecommendedExperiencesCell: UICollectionViewCell {
 extension RecommendedExperiencesCell : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-            return 4
-   
+        return viewModel?.getRecommendedExperiencesCount() ?? 0
     }
 
     
@@ -116,9 +120,12 @@ extension RecommendedExperiencesCell : UICollectionViewDelegateFlowLayout, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
-                                                                          withReuseId: ExperienceCell.CellId)
-            return cell
+        let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
+                                                                      withReuseId: ExperienceCell.CellId)
+        if let experience = self.viewModel?.fetchRecommendedExperience(at: indexPath.row) {
+            cell.bind(experience)
+        }
+        return cell
         
           
     }
