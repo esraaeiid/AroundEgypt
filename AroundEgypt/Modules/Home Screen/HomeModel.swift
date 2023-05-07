@@ -16,7 +16,7 @@ struct HomeModel: Codable {
 }
 
 // MARK: - Datum
-struct ExperienceDetailsModel: Codable {
+struct ExperienceDetailsModel: Codable, Equatable {
     let id, title: String?
     let coverPhoto: String?
     let description: String?
@@ -43,7 +43,7 @@ struct ExperienceDetailsModel: Codable {
     
     
     // MARK: - City
-    struct City: Codable {
+    struct City: Codable, Equatable {
         let id: Int?
         let name: String?
         let disable: Bool?

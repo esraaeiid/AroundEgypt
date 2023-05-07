@@ -34,6 +34,8 @@ class HomeViewModel: BaseViewModel {
     @Published var recentExperiencesList: [ExperienceDetailsModel] = []
     @Published var searchExperiencesList: [ExperienceDetailsModel] = []
     @Published var isLiked: Bool = false
+    
+    var store = ExperienceStore()
 
     public private(set) var hasNext: Bool = false
     private var page = 1
@@ -55,6 +57,7 @@ extension HomeViewModel: HomeViewModelType {
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
         self.isLoading = true
+        self.loadCachedRecommendedExperiences()
         
         var request = Request.experiencesRequest()
         request.method = Request.Methods.get.value
@@ -69,11 +72,13 @@ extension HomeViewModel: HomeViewModelType {
                     
                     self.recommendedExperiencesList += experiences.data ?? []
                     print("count⏺", self.recommendedExperiencesList.count)
+                    self.cacheRecommendedExperiences(self.recommendedExperiencesList)
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     
                     
                 case .failure(let error):
+                    self.syncCachedRecommendedExperiences()
                     switch error {
                     case .networkError:
                         self.stateDidUpdateSubject.send(.error(error.localizedDescription))
@@ -95,6 +100,7 @@ extension HomeViewModel: HomeViewModelType {
         cancellables.forEach { $0.cancel() }
         cancellables.removeAll()
         self.isLoading = true
+        self.loadCachedRecentExperiences()
         
         var request = Request.experiencesRequest()
         request.method = Request.Methods.get.value
@@ -108,11 +114,13 @@ extension HomeViewModel: HomeViewModelType {
                     
                     self.recentExperiencesList += experiences.data ?? []
                     print("count⏺", self.recentExperiencesList.count)
+                    self.cacheRecentsExperiences(self.recentExperiencesList)
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     
                     
                 case .failure(let error):
+                    self.syncCachedRecentExperiences()
                     switch error {
                     case .networkError:
                         self.stateDidUpdateSubject.send(.error(error.localizedDescription))
@@ -215,6 +223,72 @@ extension HomeViewModel: HomeViewModelType {
 //MARK: - Functions
 
 extension HomeViewModel {
+    
+    //MARK: caching
+    func syncCachedRecentExperiences(){
+        store.$recentExperiencesList.sink{ recents in
+            self.recentExperiencesList = recents
+        }.store(in: &cancellables)
+
+    }
+    
+    func syncCachedRecommendedExperiences(){
+        store.$recommendedExperiencesList.sink{ recommended in
+            self.recommendedExperiencesList = recommended
+        }.store(in: &cancellables)
+
+    }
+    
+    func loadCachedRecentExperiences(){
+        ExperienceStore.loadRecentExperience { result in
+            switch result {
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            case .success(let recents):
+                self.store.recentExperiencesList = recents
+            }
+        }
+    }
+    
+    
+    func loadCachedRecommendedExperiences(){
+        ExperienceStore.loadRecommendedExperience{ result in
+            switch result {
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            case .success(let recommended):
+                self.store.recommendedExperiencesList = recommended
+            }
+        }
+    }
+
+    
+    func cacheRecommendedExperiences(_ experiences: [ExperienceDetailsModel]){
+        if experiences != store.recommendedExperiencesList {
+            print("Hello I'm going to save! 🫡")
+            ExperienceStore.save(recommendedExperiences: experiences) { result in
+                if case .failure(let error) = result {
+                    fatalError(error.localizedDescription)
+                } else if case .success(let count) = result {
+                    print("RecommendedExperiences at store count! 🕵🏼‍♀️", count)
+                }
+            }
+        }
+    }
+    
+    func cacheRecentsExperiences(_ experiences: [ExperienceDetailsModel]){
+        if experiences != store.recentExperiencesList {
+            print("Hello I'm going to save! 🫡")
+            ExperienceStore.save(recentExperiences: experiences) { result in
+                if case .failure(let error) = result {
+                    fatalError(error.localizedDescription)
+                } else if case .success(let count) = result {
+                    print("RecentsExperiences at store count! 🕵🏼‍♀️", count)
+                }
+            }
+        }
+    }
+
     
     
     //MARK: recommended experiences
