@@ -68,9 +68,9 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         viewModel?.$isLoading.sink{ isLoading in
             print("...\(isLoading)...")
             if isLoading {
-               
+                LoadingView.show()
             } else {
-                
+                LoadingView.hide()
             }
         }.store(in: &cancellable)
        
@@ -88,7 +88,7 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         
         viewModel?.$recentExperiencesList.sink{  [weak self] exp in
             guard let self = self else { return }
-            self.homeView.mainCollectionView.reloadData()
+            self.homeView.mainCollectionView.reloadData() //
         }.store(in: &cancellable)
         
         viewModel?.$searchExperiencesList.sink{  [weak self] exp in
@@ -161,7 +161,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
             } else if section == HomeCellType.recommended.rawValue {
                return 1
             } else  {
-                return 4
+                return viewModel?.getRecentExperiencesCount() ?? 0
             }
         }
     
@@ -230,6 +230,9 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
             } else {
                 let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
                                                                               withReuseId: ExperienceCell.CellId)
+                if let experience = self.viewModel?.fetchRecentExperience(at: indexPath.row) {
+                    cell.bind(experience)
+                }
                 return cell
             }
             

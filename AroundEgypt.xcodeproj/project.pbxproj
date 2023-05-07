@@ -11,6 +11,7 @@
 		F11591D92A0798D10054B7CC /* RecommendedExperiencesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591D82A0798D10054B7CC /* RecommendedExperiencesCell.swift */; };
 		F11591DB2A079B420054B7CC /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591DA2A079B420054B7CC /* HeaderCell.swift */; };
 		F11591DD2A07A4420054B7CC /* WelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591DC2A07A4420054B7CC /* WelcomeCell.swift */; };
+		F11591E02A07AF1F0054B7CC /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591DF2A07AF1F0054B7CC /* UIImageView+Extension.swift */; };
 		F1E0194D2A051C6C001B11D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E0194C2A051C6C001B11D6 /* AppDelegate.swift */; };
 		F1E019512A051C6C001B11D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019502A051C6C001B11D6 /* HomeViewController.swift */; };
 		F1E019562A051C6D001B11D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1E019552A051C6D001B11D6 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		F11591D82A0798D10054B7CC /* RecommendedExperiencesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedExperiencesCell.swift; sourceTree = "<group>"; };
 		F11591DA2A079B420054B7CC /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		F11591DC2A07A4420054B7CC /* WelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCell.swift; sourceTree = "<group>"; };
+		F11591DF2A07AF1F0054B7CC /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		F1E019492A051C6C001B11D6 /* AroundEgypt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AroundEgypt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E0194C2A051C6C001B11D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1E019502A051C6C001B11D6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				F1E019A12A0555E1001B11D6 /* UIView+UIStackView+Constraints.swift */,
 				F1E019D52A064DC1001B11D6 /* UIFont+size.swift */,
 				F1E019D72A06566B001B11D6 /* UIColor+hex.swift */,
+				F11591DF2A07AF1F0054B7CC /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				F11591D92A0798D10054B7CC /* RecommendedExperiencesCell.swift in Sources */,
 				F1E019D82A06566B001B11D6 /* UIColor+hex.swift in Sources */,
 				F1E019BF2A05961D001B11D6 /* ParameterEncodable.swift in Sources */,
+				F11591E02A07AF1F0054B7CC /* UIImageView+Extension.swift in Sources */,
 				F1E019C72A05CEFE001B11D6 /* PhotoCacheManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

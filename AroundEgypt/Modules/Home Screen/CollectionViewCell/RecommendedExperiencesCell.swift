@@ -2,7 +2,7 @@
 //  ExperiencesCell.swift
 //  AroundEgypt
 //
-//  Created by Alaa Eid on 07/05/2023.
+//  Created by Esraa Eid on 07/05/2023.
 //
 
 import UIKit

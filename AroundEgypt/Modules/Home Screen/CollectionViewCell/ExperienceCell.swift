@@ -48,7 +48,8 @@ class ExperienceCell: UICollectionViewCell {
     
     
     var experienceImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "AppIcon"))
+        let imageView = UIImageView(image: UIImage(systemName: "photo"))
+        imageView.render(color: .lightGray)
         imageView.contentMode = .scaleToFill
         return imageView
     }()
