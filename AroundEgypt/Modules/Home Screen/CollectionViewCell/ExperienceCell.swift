@@ -50,6 +50,15 @@ class ExperienceCell: UICollectionViewCell {
         return view
     }()
     
+    let recommendedLayerView: UIView = {
+        let view = UIView()
+        view.layer.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
+        view.layer.cornerRadius = 8.75
+        view.contentMode = .scaleToFill
+        view.layer.cornerRadius = 7
+        view.layer.masksToBounds = true
+        return view
+    }()
     
     var experienceImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "photo"))
@@ -57,6 +66,25 @@ class ExperienceCell: UICollectionViewCell {
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 7
         imageView.layer.masksToBounds = true
+        return imageView
+    }()
+    
+    let recommendedLabel: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 10)
+        //GothamMedium(size: 10)
+        label.text = "RECOMMENDED"
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    
+    
+    var recommendedImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "star.fill"))
+        imageView.render(color: UIColor(hexString: "#F18757"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
         return imageView
     }()
     
@@ -109,14 +137,7 @@ class ExperienceCell: UICollectionViewCell {
         return label
     }()
 
-    
-    
-//    let likeButton: UIButton = {
-//        var button = UIButton(type: .custom)
-//        button.setImage(UIImage(named: "heartEmpty"), for: .normal)
-//        button.frame = CGRect(x: 0, y: 0, width: 20, height: 18)
-//        return button
-//    }()
+
     
     var likeImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "heartEmpty"))
@@ -153,10 +174,15 @@ class ExperienceCell: UICollectionViewCell {
         cellView.addSubview(likeImageView)
         cellView.addSubview(likesCountLabel)
         
+        experienceImage.addSubview(degreeImage)
         experienceImage.addSubview(infoImageView)
         experienceImage.addSubview(eyeImageView)
         experienceImage.addSubview(viewsCountLabel)
         experienceImage.addSubview(photosImageView)
+        
+        experienceImage.addSubview(recommendedLayerView)
+        recommendedLayerView.addSubview(recommendedLabel)
+        recommendedLayerView.addSubview(recommendedImageView)
 
         cellView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor,
                         bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor,
@@ -171,11 +197,11 @@ class ExperienceCell: UICollectionViewCell {
         
         descriptionLabel.anchor(top: experienceImage.bottomAnchor, leading: cellView.leadingAnchor,
                                 bottom: cellView.bottomAnchor, trailing: nil,
-                        padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+                        padding: .init(top: 10, left: 5, bottom: 0, right: 0))
         
         likeImageView.anchor(top: experienceImage.bottomAnchor, leading: nil,
                                 bottom: cellView.bottomAnchor, trailing: cellView.trailingAnchor,
-                        padding: .init(top: 10, left: 0, bottom: 0, right: 3))
+                        padding: .init(top: 10, left: 0, bottom: 0, right: 5))
         likeImageView.constrainWidth(constant: 20)
         
         
@@ -217,6 +243,32 @@ class ExperienceCell: UICollectionViewCell {
                             bottom: experienceImage.bottomAnchor,
                             trailing: nil,
                             padding: .init(top: 0, left: 9, bottom: 6, right: 0))
+        
+        
+        recommendedLayerView.anchor(top: experienceImage.topAnchor,
+                                    leading: experienceImage.leadingAnchor,
+                                    bottom: nil,
+                                    trailing: nil,
+                                    padding: .init(top: 9, left: 9, bottom: 0, right: 0))
+        recommendedLayerView.constrainWidth(constant: 111)
+        recommendedLayerView.constrainHeight(constant: 18)
+        
+       
+        recommendedImageView.centerYInSuperview()
+        recommendedImageView.anchor(top: nil,
+                                    leading: recommendedLayerView.leadingAnchor,
+                                    bottom: nil,
+                                    trailing: nil,
+                                    padding: .init(top: 0, left: 5, bottom: 0, right: 0))
+        recommendedImageView.constrainWidth(constant: 11)
+        
+        recommendedLabel.centerYInSuperview()
+        recommendedLabel.anchor(top: nil,
+                                leading: recommendedImageView.trailingAnchor,
+                                bottom: nil,
+                                trailing: nil,
+                                padding: .init(top: 0, left: 5, bottom: 0, right: 0))
+        
     }
     
     
@@ -236,6 +288,12 @@ class ExperienceCell: UICollectionViewCell {
             likeImageView.render(color: UIColor(hexString: "#F18757"))
         } else {
 
+        }
+        
+        if experience.recommended == 1 {
+            recommendedLayerView.isHidden = false
+        } else {
+            recommendedLayerView.isHidden = true
         }
         
         ///Image

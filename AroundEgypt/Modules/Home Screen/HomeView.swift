@@ -74,17 +74,16 @@ class HomeView: UIView {
     
     //MARK: - setup view
     func setupView(){
-    
-
+        
         //MARK:  main collectionView
         self.addSubview(mainCollectionView)
         mainCollectionView.anchor(top: safeAreaLayoutGuide.topAnchor,
-                          leading: leadingAnchor,
-                          bottom:  bottomAnchor,
-                          trailing: trailingAnchor,
-                           padding: .init(top: 0, left: 19, bottom: 0, right: 19))
-
- 
+                                  leading: leadingAnchor,
+                                  bottom:  bottomAnchor,
+                                  trailing: trailingAnchor,
+                                  padding: .init(top: 0, left: 19, bottom: 0, right: 19))
+        
+        
     }
     
 }

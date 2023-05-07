@@ -16,6 +16,7 @@ protocol HomeUseCaseType: UseCase {
 
 
 class HomeUseCase: UseCase {
+    
     // MARK: -  Vars
     var apiClient: APIClientType
 
