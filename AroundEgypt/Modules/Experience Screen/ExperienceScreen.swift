@@ -7,21 +7,38 @@
 
 import SwiftUI
 
+class ExperienceModelEnvironmentObject: ObservableObject {
+    
+    
+    @Published  var experienceID: String
+    
+    init(experienceID: String){
+        self.experienceID = experienceID
+    }
+}
+
 struct ExperienceScreen: View {
     
-    //MARK: Vars
+    //MARK: Vars    
     @StateObject var viewModel = ExperienceViewModel(useCase: ExperienceUseCase())
     
-    //        viewModel?.singleExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
+    @ObservedObject var model = ExperienceModelEnvironmentObject(experienceID: "")
+
 
     var body: some View {
         VStack {
-            Image(systemName: "photo")
-                .resizable()
-                .foregroundColor(.yellow)
-                .frame(maxWidth: .infinity, maxHeight: 291)
-                .padding(0)
+            if let exp = viewModel.singleExperience {
+                RemoteImage(singleExperience: exp)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: 291)
+                    .padding(0)
+                    .transition(.opacity)
+            }
             Spacer()
+        }
+        .environmentObject(viewModel)
+        .onAppear {
+            viewModel.singleExperienceRequest(with: model.experienceID)
         }
     }
 }

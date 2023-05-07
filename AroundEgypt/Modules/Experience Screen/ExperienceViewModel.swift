@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 protocol ExperienceViewModelType {
     func singleExperienceRequest(with id: String)
@@ -66,7 +67,6 @@ extension ExperienceViewModel: ExperienceViewModelType {
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     
-                    
                 case .failure(let error):
                     switch error {
                     case .networkError:
@@ -103,7 +103,7 @@ extension ExperienceViewModel: ExperienceViewModelType {
                     
                     self.isLiked = true
                     self.stateDidUpdateSubject.send(.show(true))
-                    
+                   
                     
                     
                 case .failure(let error):
@@ -133,8 +133,40 @@ extension ExperienceViewModel {
 
     //MARK: single experiences
     
+    func loadImage(singleExperience: ExperienceModel){
+        ///Image
+//        switch singleExperience.data {
+//        case .experienceDetails(let experience):
+//            if let url = experience.coverPhoto,
+//               let experienceID = experience.id {
+//                imageLoader = ImageLoader(url: url,
+//                                          photoID: experienceID)
+//            }
+//        case .int(_):
+//            break
+//        case .none:
+//            break
+//        }
+//
+//        guard imageLoader != nil else {
+//            return
+//        }
+//
+//        imageLoader?.$image.sink { [weak self] img in
+//            guard let self = self else { return }
+//
+//            if img != nil {
+//                RunLoop.main.perform {
+//                    self.loadedImage = img ?? UIImage()
+//                    self.imageLoader = nil
+//                }
+//            }
+//
+//        }.store(in: &cancellable)
+    }
     
     //MARK: like experiences
+    
     
 
 }

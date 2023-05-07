@@ -63,6 +63,7 @@
 		F1E019F02A065CDB001B11D6 /* GothamRounded-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019CD2A064C86001B11D6 /* GothamRounded-MediumItalic.otf */; };
 		F1E019F12A065CE1001B11D6 /* GothamRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019CC2A064C86001B11D6 /* GothamRounded-Medium.otf */; };
 		F1E019F22A065CE3001B11D6 /* GothamRounded-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019CA2A064C86001B11D6 /* GothamRounded-LightItalic.otf */; };
+		F1F9150C2A086BA5006A7628 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F9150B2A086BA5006A7628 /* RemoteImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,6 +144,7 @@
 		F1E019DF2A065CA3001B11D6 /* GothamLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamLightItalic.ttf; sourceTree = "<group>"; };
 		F1E019E02A065CA3001B11D6 /* GothamBook.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBook.ttf; sourceTree = "<group>"; };
 		F1E019E12A065CA3001B11D6 /* GothamBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBoldItalic.ttf; sourceTree = "<group>"; };
+		F1F9150B2A086BA5006A7628 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,6 +356,7 @@
 		F1E019872A05290F001B11D6 /* Experience Screen */ = {
 			isa = PBXGroup;
 			children = (
+				F1F9150B2A086BA5006A7628 /* RemoteImage.swift */,
 				F1E019BC2A055C41001B11D6 /* ExperienceScreen.swift */,
 				F1E019B42A0557D7001B11D6 /* ExperienceModel.swift */,
 				F1E019B62A0557F2001B11D6 /* ExperienceUseCase.swift */,
@@ -585,6 +588,7 @@
 				F1E019892A052B9B001B11D6 /* Coordinator.swift in Sources */,
 				F1E019912A053B7A001B11D6 /* NetworkResponse.swift in Sources */,
 				F1E019A22A0555E1001B11D6 /* UIView+UIStackView+Constraints.swift in Sources */,
+				F1F9150C2A086BA5006A7628 /* RemoteImage.swift in Sources */,
 				F1E019B92A0557FD001B11D6 /* ExperienceViewModel.swift in Sources */,
 				F1E019AD2A055756001B11D6 /* HomeView.swift in Sources */,
 				F11591D92A0798D10054B7CC /* RecommendedExperiencesCell.swift in Sources */,
