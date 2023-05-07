@@ -32,8 +32,7 @@ class HeaderCell: UICollectionViewCell {
     
     let cellView: UIView = {
         let view = UIView()
-        view.backgroundColor = .yellow
-        //UIColor(hexString: "#F5F5F5")
+        view.backgroundColor = UIColor(hexString: "#F5F5F5")
         view.contentMode = .scaleToFill
         view.layer.cornerRadius = 5
         view.layer.masksToBounds = true
@@ -41,7 +40,7 @@ class HeaderCell: UICollectionViewCell {
     }()
     
     
-    let recommendedTitleLabel: UILabel = {
+    let titleLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 22)
             //GothamRoundedBold(size: 22)
@@ -55,15 +54,15 @@ class HeaderCell: UICollectionViewCell {
     
     func setupViews() {
         contentView.addSubview(cellView)
-        cellView.addSubview(recommendedTitleLabel)
+        cellView.addSubview(titleLabel)
 
         cellView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor,
                         bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor,
                         padding: .init(top: 0, left: 0, bottom: 0, right: 0))
         
-        recommendedTitleLabel.anchor(top: cellView.topAnchor, leading: cellView.leadingAnchor,
+        titleLabel.anchor(top: cellView.topAnchor, leading: cellView.leadingAnchor,
                         bottom: cellView.bottomAnchor, trailing: cellView.trailingAnchor,
-                        padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+                        padding: .init(top: 15, left: 0, bottom: 0, right: 0))
         
         
     }

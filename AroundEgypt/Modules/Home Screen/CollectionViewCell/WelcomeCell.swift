@@ -45,6 +45,7 @@ class WelcomeCell: UICollectionViewCell {
     var headerStackView: UIStackView = {
        var containerView = UIStackView()
         containerView.axis = .vertical
+        containerView.spacing = 4
         containerView.distribution = .fillProportionally
         containerView.alignment = .fill
         containerView.backgroundColor = UIColor(hexString: "#F5F5F5")
@@ -82,7 +83,6 @@ class WelcomeCell: UICollectionViewCell {
     func setupViews() {
         contentView.addSubview(cellView)
         cellView.addSubview(headerStackView)
-        headerStackView.constrainHeight(constant: 100)
         headerStackView.addArrangedSubviews([titleLabel, subTitleLabel])
         
         cellView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor,
@@ -95,7 +95,7 @@ class WelcomeCell: UICollectionViewCell {
 
         headerStackView.anchor(top: cellView.topAnchor,
                                leading: cellView.leadingAnchor,
-                               bottom: nil,
+                               bottom: cellView.bottomAnchor,
                                trailing: cellView.trailingAnchor,
                                padding: .init(top: 0, left: 0, bottom: 0, right: 0))
         

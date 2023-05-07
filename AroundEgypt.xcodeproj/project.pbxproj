@@ -168,6 +168,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F11591E12A07B8FD0054B7CC /* HeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				F11591DA2A079B420054B7CC /* HeaderCell.swift */,
+			);
+			path = HeaderCell;
+			sourceTree = "<group>";
+		};
 		F1E019402A051C6C001B11D6 = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +328,7 @@
 		F1E019862A0528FC001B11D6 /* Home Screen */ = {
 			isa = PBXGroup;
 			children = (
+				F11591E12A07B8FD0054B7CC /* HeaderCell */,
 				F1E019A32A055678001B11D6 /* CollectionViewCell */,
 				F1E019502A051C6C001B11D6 /* HomeViewController.swift */,
 				F1E019AC2A055756001B11D6 /* HomeView.swift */,
@@ -347,7 +356,6 @@
 			children = (
 				F1E019BA2A05587A001B11D6 /* ExperienceCell.swift */,
 				F11591D82A0798D10054B7CC /* RecommendedExperiencesCell.swift */,
-				F11591DA2A079B420054B7CC /* HeaderCell.swift */,
 				F11591DC2A07A4420054B7CC /* WelcomeCell.swift */,
 			);
 			path = CollectionViewCell;

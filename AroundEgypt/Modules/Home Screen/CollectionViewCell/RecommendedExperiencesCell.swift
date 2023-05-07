@@ -124,6 +124,12 @@ extension RecommendedExperiencesCell : UICollectionViewDelegateFlowLayout, UICol
                                                                       withReuseId: ExperienceCell.CellId)
         if let experience = self.viewModel?.fetchRecommendedExperience(at: indexPath.row) {
             cell.bind(experience)
+            cell.likeTapped = { [weak self] in
+                guard let self = self else { return }
+                if let experienceID = experience.id {
+                    self.viewModel?.likeExperienceRequest(with: experienceID)
+                }
+            }
         }
         return cell
         

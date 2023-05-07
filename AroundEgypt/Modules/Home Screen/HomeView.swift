@@ -33,7 +33,7 @@ class HomeView: UIView {
     lazy var mainCollectionView: UICollectionView =  {
          let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = 10
+        flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
 

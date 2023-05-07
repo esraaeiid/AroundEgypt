@@ -35,8 +35,6 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         viewModel?.recommendedExperiencesRequest()
         viewModel?.recentExperiencesRequest()
         
-        //        viewModel?.likeExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
-        //        viewModel?.likeExperienceRequest(with: "Nefertari")
         //        viewModel?.singleExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
         
         self.view.isUserInteractionEnabled = true
@@ -79,13 +77,22 @@ class HomeViewController: BaseViewController<HomeViewModel> {
             self.render(state)
         }.store(in: &cancellable)
 
+        viewModel?.$recommendedExperiencesList.sink{  [weak self] exp in
+            guard let self = self else { return }
+            self.homeView.mainCollectionView.reloadData()
+        }.store(in: &cancellable)
             
         viewModel?.$recentExperiencesList.sink{  [weak self] exp in
             guard let self = self else { return }
-            self.homeView.mainCollectionView.reloadData() //
+            self.homeView.mainCollectionView.reloadData()
         }.store(in: &cancellable)
         
         viewModel?.$searchExperiencesList.sink{  [weak self] exp in
+            guard let self = self else { return }
+            self.homeView.mainCollectionView.reloadData()
+        }.store(in: &cancellable)
+        
+        viewModel?.$isLiked.sink{  [weak self] exp in
             guard let self = self else { return }
             self.homeView.mainCollectionView.reloadData()
         }.store(in: &cancellable)
@@ -138,7 +145,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
         case .search:
             return 1
         case .list:
-            return 3
+            return HomeCellType.allCases.count
         }
     }
     
@@ -148,7 +155,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
         switch homaPresenation {
             
         case .search:
-            return 4 //photos
+            return viewModel?.getSearchExperiencesCount() ?? 0
         case .list:
             if section == HomeCellType.welcome.rawValue {
                 return 1
@@ -168,7 +175,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
             return CGSize(width: collectionView.frame.width, height: 200)
         case .list:
             if indexPath.section == HomeCellType.welcome.rawValue {
-                return CGSize(width: collectionView.frame.width, height: 100)
+                return CGSize(width: collectionView.frame.width, height: 80)
             } else {
                 return CGSize(width: collectionView.frame.width, height: 200)
             }
@@ -187,7 +194,7 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
                 return CGSize(width: collectionView.frame.width, height: 0)
             } else {
                 
-                return CGSize(width: collectionView.frame.width, height: 80)
+                return CGSize(width: collectionView.frame.width, height: 70)
             }
            
         }
@@ -207,6 +214,9 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
         case .search:
             let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
                                                                           withReuseId: ExperienceCell.CellId)
+            if let experience = self.viewModel?.fetchRecentExperience(at: indexPath.row) {
+                cell.bind(experience)
+            }
             return cell
             
         case .list:
@@ -221,7 +231,12 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
                                                                                           withReuseId: RecommendedExperiencesCell.CellId)
                 
                 viewModel?.$recommendedExperiencesList.sink{  [weak self] exp in
-                    guard let self = self else { return }
+                    guard self != nil else { return }
+                    cell.recommendedExperiencesCollectionView.reloadData()
+                }.store(in: &cancellable)
+                
+                viewModel?.$isLiked.sink{  [weak self] exp in
+                    guard self != nil else { return }
                     cell.recommendedExperiencesCollectionView.reloadData()
                 }.store(in: &cancellable)
                 
@@ -233,6 +248,13 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
                                                                               withReuseId: ExperienceCell.CellId)
                 if let experience = self.viewModel?.fetchRecentExperience(at: indexPath.row) {
                     cell.bind(experience)
+                    cell.likeTapped = { [weak self] in
+                        guard let self = self else { return }
+                        if let experienceID = experience.id {
+                            print("experienceID", experienceID)
+                            self.viewModel?.likeExperienceRequest(with: experienceID)
+                        }
+                    }
                 }
                 return cell
             }
@@ -248,7 +270,14 @@ extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionV
             assertionFailure("Can't dequeueReusableSupplementaryView")
             return UICollectionReusableView()
         }
-
+        
+        if indexPath.section == HomeCellType.recommended.rawValue {
+            cell.titleLabel.text = "Recommended Experiences"
+            
+        } else if indexPath.section == HomeCellType.recents.rawValue {
+            cell.titleLabel.text = "Most Recent"
+        }
+        
         return cell
     }
 

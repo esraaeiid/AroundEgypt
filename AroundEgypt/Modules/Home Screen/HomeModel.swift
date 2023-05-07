@@ -85,7 +85,7 @@ enum HomePresenation {
 }
 
 
-enum HomeCellType: Int {
+enum HomeCellType: Int, CaseIterable {
     case welcome = 0
     case recommended = 1
     case recents = 2

@@ -33,6 +33,7 @@ class HomeViewModel: BaseViewModel {
     @Published var recommendedExperiencesList: [ExperienceDetailsModel] = []
     @Published var recentExperiencesList: [ExperienceDetailsModel] = []
     @Published var searchExperiencesList: [ExperienceDetailsModel] = []
+    @Published var isLiked: Bool = false
 
     public private(set) var hasNext: Bool = false
     private var page = 1
@@ -183,10 +184,9 @@ extension HomeViewModel: HomeViewModelType {
                 guard let self = self else { return }
                 self.isLoading = false
                 switch result {
-                case .success(let experience):
+                case .success(_):
                     
-//                    self.recentExperiencesList += experiences.data
-//                    print("count⏺", self.recentExperiencesList.count)
+                    self.isLiked = true
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     
