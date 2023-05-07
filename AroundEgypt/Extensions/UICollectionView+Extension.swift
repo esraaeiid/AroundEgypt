@@ -41,6 +41,16 @@ func register<T: UICollectionViewCell>(nibWithCellClass name: T.Type, at bundleC
         }
         return cell
     }
+    
+    
+    func dequeueReusableCell<T: UICollectionViewCell>(for indexPath: IndexPath, withReuseId: String) -> T {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: withReuseId, for: indexPath) as? T else {
+            assertionFailure("Can't dequeueReusableCell")
+            return T()
+        }
+
+        return cell
+    }
 
 
 }

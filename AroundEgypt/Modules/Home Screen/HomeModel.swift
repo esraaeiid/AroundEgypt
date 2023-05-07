@@ -79,3 +79,14 @@ struct Pagination: Codable {
 }
 
 
+enum HomePresenation {
+    case search
+    case list
+}
+
+
+enum HomeCellType: Int {
+    case welcome = 0
+    case recommended = 1
+    case recents = 2
+}

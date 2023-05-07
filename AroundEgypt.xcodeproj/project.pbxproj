@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F11591D72A0703960054B7CC /* GothamRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F11591D62A0703960054B7CC /* GothamRounded-Bold.otf */; };
+		F11591D92A0798D10054B7CC /* RecommendedExperiencesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591D82A0798D10054B7CC /* RecommendedExperiencesCell.swift */; };
+		F11591DB2A079B420054B7CC /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591DA2A079B420054B7CC /* HeaderCell.swift */; };
+		F11591DD2A07A4420054B7CC /* WelcomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11591DC2A07A4420054B7CC /* WelcomeCell.swift */; };
 		F1E0194D2A051C6C001B11D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E0194C2A051C6C001B11D6 /* AppDelegate.swift */; };
 		F1E019512A051C6C001B11D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019502A051C6C001B11D6 /* HomeViewController.swift */; };
 		F1E019562A051C6D001B11D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1E019552A051C6D001B11D6 /* Assets.xcassets */; };
@@ -41,6 +45,22 @@
 		F1E019C52A05CECD001B11D6 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019C42A05CECD001B11D6 /* ImageLoader.swift */; };
 		F1E019C72A05CEFE001B11D6 /* PhotoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019C62A05CEFE001B11D6 /* PhotoCacheManager.swift */; };
 		F1E019D62A064DC1001B11D6 /* UIFont+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019D52A064DC1001B11D6 /* UIFont+size.swift */; };
+		F1E019D82A06566B001B11D6 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E019D72A06566B001B11D6 /* UIColor+hex.swift */; };
+		F1E019E22A065CA3001B11D6 /* GothamBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019D92A065CA3001B11D6 /* GothamBold.ttf */; };
+		F1E019E32A065CA3001B11D6 /* GothamLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019DA2A065CA3001B11D6 /* GothamLight.ttf */; };
+		F1E019E42A065CA3001B11D6 /* GothamBookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019DB2A065CA3001B11D6 /* GothamBookItalic.ttf */; };
+		F1E019E62A065CA3001B11D6 /* GothamMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019DD2A065CA3001B11D6 /* GothamMedium.ttf */; };
+		F1E019E72A065CA3001B11D6 /* GothamMediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019DE2A065CA3001B11D6 /* GothamMediumItalic.ttf */; };
+		F1E019E82A065CA3001B11D6 /* GothamLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019DF2A065CA3001B11D6 /* GothamLightItalic.ttf */; };
+		F1E019E92A065CA3001B11D6 /* GothamBook.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019E02A065CA3001B11D6 /* GothamBook.ttf */; };
+		F1E019EA2A065CA3001B11D6 /* GothamBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019E12A065CA3001B11D6 /* GothamBoldItalic.ttf */; };
+		F1E019EC2A065CC1001B11D6 /* GothamRounded-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019D02A064C86001B11D6 /* GothamRounded-BoldItalic.otf */; };
+		F1E019ED2A065CC6001B11D6 /* GothamRounded-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019D22A064C86001B11D6 /* GothamRounded-Book.otf */; };
+		F1E019EE2A065CC9001B11D6 /* GothamRounded-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019D42A064C86001B11D6 /* GothamRounded-BookItalic.otf */; };
+		F1E019EF2A065CCB001B11D6 /* GothamRounded-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019D12A064C86001B11D6 /* GothamRounded-Light.otf */; };
+		F1E019F02A065CDB001B11D6 /* GothamRounded-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019CD2A064C86001B11D6 /* GothamRounded-MediumItalic.otf */; };
+		F1E019F12A065CE1001B11D6 /* GothamRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019CC2A064C86001B11D6 /* GothamRounded-Medium.otf */; };
+		F1E019F22A065CE3001B11D6 /* GothamRounded-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E019CA2A064C86001B11D6 /* GothamRounded-LightItalic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +81,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F11591D62A0703960054B7CC /* GothamRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Bold.otf"; sourceTree = "<group>"; };
+		F11591D82A0798D10054B7CC /* RecommendedExperiencesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedExperiencesCell.swift; sourceTree = "<group>"; };
+		F11591DA2A079B420054B7CC /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		F11591DC2A07A4420054B7CC /* WelcomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCell.swift; sourceTree = "<group>"; };
 		F1E019492A051C6C001B11D6 /* AroundEgypt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AroundEgypt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E0194C2A051C6C001B11D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1E019502A051C6C001B11D6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +123,6 @@
 		F1E019C42A05CECD001B11D6 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		F1E019C62A05CEFE001B11D6 /* PhotoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheManager.swift; sourceTree = "<group>"; };
 		F1E019CA2A064C86001B11D6 /* GothamRounded-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-LightItalic.otf"; sourceTree = "<group>"; };
-		F1E019CB2A064C86001B11D6 /* GothamRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Bold.otf"; sourceTree = "<group>"; };
 		F1E019CC2A064C86001B11D6 /* GothamRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Medium.otf"; sourceTree = "<group>"; };
 		F1E019CD2A064C86001B11D6 /* GothamRounded-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-MediumItalic.otf"; sourceTree = "<group>"; };
 		F1E019D02A064C86001B11D6 /* GothamRounded-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-BoldItalic.otf"; sourceTree = "<group>"; };
@@ -107,6 +130,15 @@
 		F1E019D22A064C86001B11D6 /* GothamRounded-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Book.otf"; sourceTree = "<group>"; };
 		F1E019D42A064C86001B11D6 /* GothamRounded-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-BookItalic.otf"; sourceTree = "<group>"; };
 		F1E019D52A064DC1001B11D6 /* UIFont+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+size.swift"; sourceTree = "<group>"; };
+		F1E019D72A06566B001B11D6 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
+		F1E019D92A065CA3001B11D6 /* GothamBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBold.ttf; sourceTree = "<group>"; };
+		F1E019DA2A065CA3001B11D6 /* GothamLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamLight.ttf; sourceTree = "<group>"; };
+		F1E019DB2A065CA3001B11D6 /* GothamBookItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBookItalic.ttf; sourceTree = "<group>"; };
+		F1E019DD2A065CA3001B11D6 /* GothamMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMedium.ttf; sourceTree = "<group>"; };
+		F1E019DE2A065CA3001B11D6 /* GothamMediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMediumItalic.ttf; sourceTree = "<group>"; };
+		F1E019DF2A065CA3001B11D6 /* GothamLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamLightItalic.ttf; sourceTree = "<group>"; };
+		F1E019E02A065CA3001B11D6 /* GothamBook.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBook.ttf; sourceTree = "<group>"; };
+		F1E019E12A065CA3001B11D6 /* GothamBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBoldItalic.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +273,7 @@
 				F1E0199F2A05553B001B11D6 /* UICollectionView+Extension.swift */,
 				F1E019A12A0555E1001B11D6 /* UIView+UIStackView+Constraints.swift */,
 				F1E019D52A064DC1001B11D6 /* UIFont+size.swift */,
+				F1E019D72A06566B001B11D6 /* UIColor+hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +343,9 @@
 			isa = PBXGroup;
 			children = (
 				F1E019BA2A05587A001B11D6 /* ExperienceCell.swift */,
+				F11591D82A0798D10054B7CC /* RecommendedExperiencesCell.swift */,
+				F11591DA2A079B420054B7CC /* HeaderCell.swift */,
+				F11591DC2A07A4420054B7CC /* WelcomeCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -334,8 +370,16 @@
 		F1E019C82A064C7A001B11D6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				F1E019CB2A064C86001B11D6 /* GothamRounded-Bold.otf */,
+				F1E019D92A065CA3001B11D6 /* GothamBold.ttf */,
+				F1E019E12A065CA3001B11D6 /* GothamBoldItalic.ttf */,
+				F1E019E02A065CA3001B11D6 /* GothamBook.ttf */,
+				F1E019DB2A065CA3001B11D6 /* GothamBookItalic.ttf */,
+				F1E019DA2A065CA3001B11D6 /* GothamLight.ttf */,
+				F1E019DF2A065CA3001B11D6 /* GothamLightItalic.ttf */,
+				F1E019DD2A065CA3001B11D6 /* GothamMedium.ttf */,
+				F1E019DE2A065CA3001B11D6 /* GothamMediumItalic.ttf */,
 				F1E019D02A064C86001B11D6 /* GothamRounded-BoldItalic.otf */,
+				F11591D62A0703960054B7CC /* GothamRounded-Bold.otf */,
 				F1E019D22A064C86001B11D6 /* GothamRounded-Book.otf */,
 				F1E019D42A064C86001B11D6 /* GothamRounded-BookItalic.otf */,
 				F1E019D12A064C86001B11D6 /* GothamRounded-Light.otf */,
@@ -450,8 +494,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E019EC2A065CC1001B11D6 /* GothamRounded-BoldItalic.otf in Resources */,
+				F1E019E42A065CA3001B11D6 /* GothamBookItalic.ttf in Resources */,
+				F1E019ED2A065CC6001B11D6 /* GothamRounded-Book.otf in Resources */,
+				F1E019E92A065CA3001B11D6 /* GothamBook.ttf in Resources */,
+				F1E019E72A065CA3001B11D6 /* GothamMediumItalic.ttf in Resources */,
 				F1E019592A051C6D001B11D6 /* LaunchScreen.storyboard in Resources */,
+				F1E019EF2A065CCB001B11D6 /* GothamRounded-Light.otf in Resources */,
+				F1E019EE2A065CC9001B11D6 /* GothamRounded-BookItalic.otf in Resources */,
+				F1E019EA2A065CA3001B11D6 /* GothamBoldItalic.ttf in Resources */,
+				F1E019E82A065CA3001B11D6 /* GothamLightItalic.ttf in Resources */,
+				F1E019F02A065CDB001B11D6 /* GothamRounded-MediumItalic.otf in Resources */,
+				F1E019E62A065CA3001B11D6 /* GothamMedium.ttf in Resources */,
 				F1E019562A051C6D001B11D6 /* Assets.xcassets in Resources */,
+				F1E019F22A065CE3001B11D6 /* GothamRounded-LightItalic.otf in Resources */,
+				F11591D72A0703960054B7CC /* GothamRounded-Bold.otf in Resources */,
+				F1E019F12A065CE1001B11D6 /* GothamRounded-Medium.otf in Resources */,
+				F1E019E22A065CA3001B11D6 /* GothamBold.ttf in Resources */,
+				F1E019E32A065CA3001B11D6 /* GothamLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F11591DD2A07A4420054B7CC /* WelcomeCell.swift in Sources */,
 				F1E019962A053BA0001B11D6 /* Publisher.swift in Sources */,
 				F1E0199C2A0552D2001B11D6 /* BaseViewModel.swift in Sources */,
 				F1E019512A051C6C001B11D6 /* HomeViewController.swift in Sources */,
@@ -496,6 +557,7 @@
 				F1E019A52A055707001B11D6 /* HomeUseCase.swift in Sources */,
 				F1E019942A053B8E001B11D6 /* Request.swift in Sources */,
 				F1E0199E2A0552EA001B11D6 /* UseCase.swift in Sources */,
+				F11591DB2A079B420054B7CC /* HeaderCell.swift in Sources */,
 				F1E019BD2A055C41001B11D6 /* ExperienceScreen.swift in Sources */,
 				F1E019B52A0557D7001B11D6 /* ExperienceModel.swift in Sources */,
 				F1E019892A052B9B001B11D6 /* Coordinator.swift in Sources */,
@@ -503,6 +565,8 @@
 				F1E019A22A0555E1001B11D6 /* UIView+UIStackView+Constraints.swift in Sources */,
 				F1E019B92A0557FD001B11D6 /* ExperienceViewModel.swift in Sources */,
 				F1E019AD2A055756001B11D6 /* HomeView.swift in Sources */,
+				F11591D92A0798D10054B7CC /* RecommendedExperiencesCell.swift in Sources */,
+				F1E019D82A06566B001B11D6 /* UIColor+hex.swift in Sources */,
 				F1E019BF2A05961D001B11D6 /* ParameterEncodable.swift in Sources */,
 				F1E019C72A05CEFE001B11D6 /* PhotoCacheManager.swift in Sources */,
 			);

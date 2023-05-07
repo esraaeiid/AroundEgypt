@@ -14,13 +14,15 @@ class HomeViewController: BaseViewController<HomeViewModel> {
     var coordinator: HomeCoordinator?
     var homeView = HomeView()
     
+    var homaPresenation: HomePresenation = .list
     
     //MARK: View LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        self.view.backgroundColor = .yellow
+        
+        self.view.backgroundColor = UIColor(hexString: "#F5F5F5")
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,12 +32,13 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         coordinator?.view = self
 
         
-        //        viewModel?.recommendedExperiencesRequest()
-        //        viewModel?.recentExperiencesRequest()
+        viewModel?.recommendedExperiencesRequest()
+        viewModel?.recentExperiencesRequest()
         
         //        viewModel?.likeExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
         //        viewModel?.likeExperienceRequest(with: "Nefertari")
         //        viewModel?.singleExperienceRequest(with: "94a6e522-0e6a-480d-b70b-9bffd0068f11")
+        
         self.view.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(tessst))
         view.addGestureRecognizer(tap)
@@ -49,10 +52,12 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         
     }
     
+    
     override func loadView() {
         view = homeView
     }
 
+    
     @objc func tessst(){
         coordinator?.presentExperience(with: "")
     }
@@ -77,8 +82,21 @@ class HomeViewController: BaseViewController<HomeViewModel> {
         
         viewModel?.$recommendedExperiencesList.sink{  [weak self] exp in
             guard let self = self else { return }
-            //reload collectionView
+            self.homeView.mainCollectionView.reloadData()
         }.store(in: &cancellable)
+        
+        
+        viewModel?.$recentExperiencesList.sink{  [weak self] exp in
+            guard let self = self else { return }
+            self.homeView.mainCollectionView.reloadData()
+        }.store(in: &cancellable)
+        
+        viewModel?.$searchExperiencesList.sink{  [weak self] exp in
+            guard let self = self else { return }
+            self.homeView.mainCollectionView.reloadData()
+        }.store(in: &cancellable)
+        
+
     }
     
     
@@ -92,7 +110,144 @@ class HomeViewController: BaseViewController<HomeViewModel> {
             print("error 😭 \(errorMessage) 😭")
         }
     }
+    
+    
+    
+    //MARK: - functions
+    
+    func setup(){
+        
+        //MARK:- mainCollectionView CollectionView
+        homeView.mainCollectionView.delegate = self
+        homeView.mainCollectionView.dataSource = self
+        homeView.mainCollectionView.register(ExperienceCell.self, forCellWithReuseIdentifier: ExperienceCell.CellId)
+        homeView.mainCollectionView.register(RecommendedExperiencesCell.self, forCellWithReuseIdentifier: RecommendedExperiencesCell.CellId)
+        
+        homeView.mainCollectionView.register(WelcomeCell.self, forCellWithReuseIdentifier: WelcomeCell.CellId)
+        
+        homeView.mainCollectionView.register(HeaderCell.self,
+                                             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                             withReuseIdentifier: HeaderCell.CellId)
+    }
 
 
+}
+
+
+// MARK: - ...  UICollectionViewDelegateFlowLayout & UICollectionViewDataSource
+
+extension HomeViewController : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+      
+        switch homaPresenation {
+        case .search:
+            return 1
+        case .list:
+            return 3
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        
+        switch homaPresenation {
+            
+        case .search:
+            return 4 //photos
+        case .list:
+            if section == HomeCellType.welcome.rawValue {
+                return 1
+            } else if section == HomeCellType.recommended.rawValue {
+               return 1
+            } else  {
+                return 4
+            }
+        }
+    
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch homaPresenation {
+        case .search:
+            return CGSize(width: collectionView.frame.width, height: 200)
+        case .list:
+            if indexPath.section == HomeCellType.welcome.rawValue {
+                return CGSize(width: collectionView.frame.width, height: 100)
+            } else {
+                return CGSize(width: collectionView.frame.width, height: 200)
+            }
+        }
+        
+           
+    }
+    
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        switch homaPresenation {
+        case .search:
+            return CGSize(width: collectionView.frame.width, height: 0)
+        case .list:
+            if section == HomeCellType.welcome.rawValue {
+                return CGSize(width: collectionView.frame.width, height: 0)
+            } else {
+                
+                return CGSize(width: collectionView.frame.width, height: 80)
+            }
+           
+        }
+     
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+
+    }
+        
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+        switch homaPresenation  {
+            
+        case .search:
+            let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
+                                                                          withReuseId: ExperienceCell.CellId)
+            return cell
+            
+        case .list:
+            if indexPath.section == HomeCellType.welcome.rawValue {
+                let cell: WelcomeCell = collectionView.dequeueReusableCell(for: indexPath,
+                                                                                          withReuseId: WelcomeCell.CellId)
+                return cell
+           
+                
+            } else if indexPath.section == HomeCellType.recommended.rawValue {
+                let cell: RecommendedExperiencesCell = collectionView.dequeueReusableCell(for: indexPath,
+                                                                                          withReuseId: RecommendedExperiencesCell.CellId)
+                return cell
+                
+            } else {
+                let cell: ExperienceCell = collectionView.dequeueReusableCell(for: indexPath,
+                                                                              withReuseId: ExperienceCell.CellId)
+                return cell
+            }
+            
+        }
+          
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+       guard let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                   withReuseIdentifier: HeaderCell.CellId,
+                                                                               for: indexPath) as? HeaderCell else {
+            assertionFailure("Can't dequeueReusableSupplementaryView")
+            return UICollectionReusableView()
+        }
+
+        return cell
+    }
+
+    
 }
 
