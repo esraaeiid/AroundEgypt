@@ -19,21 +19,37 @@ class ExperienceModelEnvironmentObject: ObservableObject {
 
 struct ExperienceScreen: View {
     
-    //MARK: Vars    
+    //MARK: Vars
     @StateObject var viewModel = ExperienceViewModel(useCase: ExperienceUseCase())
     
     @ObservedObject var model = ExperienceModelEnvironmentObject(experienceID: "")
-
-
+    
+    
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
             
             if let exp = viewModel.singleExperience {
-                RemoteImage(singleExperience: exp)
-                    .frame(maxWidth: .infinity, maxHeight: 250)
-                    .padding(0)
-                    .transition(.opacity)
-                    .clipped()
+                ZStack(alignment: .bottomLeading) {
+                    RemoteImage(singleExperience: exp)
+                        .frame(maxWidth: .infinity, maxHeight: 250)
+                        .padding(0)
+                        .transition(.opacity)
+                        .clipped()
+                    
+                    
+                    HStack() {
+                        Image(uiImage: UIImage(named: "eye") ?? UIImage())
+                            .padding(.leading, 15)
+                            .padding(.bottom, 15)
+                        Text("\(viewModel.noOfViews) views")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .lineLimit(1)
+                            .padding(.leading, 4)
+                            .padding(.bottom, 15)
+                    }
+                    
+                }
             }
             
             HStack(alignment: .top, spacing: 10) {
@@ -41,7 +57,7 @@ struct ExperienceScreen: View {
                 VStack(alignment: .leading, spacing: 0){
                     Text(viewModel.title)
                         .font(.headline)
-                        .lineLimit(1)
+                        .lineLimit(2)
                     Text(viewModel.location)
                         .font(.subheadline)
                         .lineLimit(1)
@@ -67,18 +83,18 @@ struct ExperienceScreen: View {
             }
             .padding([.horizontal, .bottom])
             
-            
-            VStack(alignment: .leading, spacing: 0){
-                Text("Description")
-                    .font(.headline)
-                    .lineLimit(1)
-                Text(viewModel.description)
-                    .font(.subheadline)
-                    .multilineTextAlignment(.leading)
+            HStack {
+                VStack(alignment: .leading, spacing: 0){
+                    Text("Description")
+                        .font(.headline)
+                        .lineLimit(1)
+                    Text(viewModel.description)
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                }
             }
-
-
-                
+            
+            
             .padding([.horizontal, .bottom])
             Spacer()
         }

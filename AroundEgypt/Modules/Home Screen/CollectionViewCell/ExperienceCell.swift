@@ -205,9 +205,10 @@ class ExperienceCell: UICollectionViewCell {
         likeImageView.constrainWidth(constant: 20)
         
         
-        likesCountLabel.anchor(top: experienceImage.bottomAnchor, leading: nil,
+        likesCountLabel.anchor(top: experienceImage.bottomAnchor,
+                               leading: descriptionLabel.trailingAnchor,
                                 bottom: cellView.bottomAnchor, trailing: likeImageView.leadingAnchor,
-                        padding: .init(top: 10, left: 0, bottom: 0, right: 7))
+                        padding: .init(top: 10, left: 5, bottom: 0, right: 7))
         
         degreeImage.constrainWidth(constant: 37)
         degreeImage.constrainHeight(constant: 37)
