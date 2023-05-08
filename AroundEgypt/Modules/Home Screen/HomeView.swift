@@ -28,6 +28,7 @@ class HomeView: UIView {
         var searchBar = UISearchBar(frame: CGRectMake(0, 0, 150, 20))
         searchBar.placeholder = "Try \"Luxor\""
         searchBar.tintColor = .black
+        searchBar.accessibilityIdentifier = "search"
         return searchBar
     }()
     
