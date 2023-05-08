@@ -26,14 +26,60 @@ struct ExperienceScreen: View {
 
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center, spacing: 16) {
+            
             if let exp = viewModel.singleExperience {
                 RemoteImage(singleExperience: exp)
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity, maxHeight: 291)
+                    .frame(maxWidth: .infinity, maxHeight: 250)
                     .padding(0)
                     .transition(.opacity)
+                    .clipped()
             }
+            
+            HStack(alignment: .top, spacing: 10) {
+                
+                VStack(alignment: .leading, spacing: 0){
+                    Text(viewModel.title)
+                        .font(.headline)
+                        .lineLimit(1)
+                    Text(viewModel.location)
+                        .font(.subheadline)
+                        .lineLimit(1)
+                }
+                
+                Spacer()
+                
+                Button {
+                } label: {
+                    Image(uiImage: UIImage(named: "share") ?? UIImage())
+                }
+                
+                Button {
+                    viewModel.likeExperienceRequest(with: model.experienceID)
+                } label: {
+                    Image(uiImage: UIImage(named: "heartEmpty") ?? UIImage())
+                }
+                
+                Text(viewModel.noOfLikes)
+                    .font(.headline)
+                    .lineLimit(1)
+                
+            }
+            .padding([.horizontal, .bottom])
+            
+            
+            VStack(alignment: .leading, spacing: 0){
+                Text("Description")
+                    .font(.headline)
+                    .lineLimit(1)
+                Text(viewModel.description)
+                    .font(.subheadline)
+                    .multilineTextAlignment(.leading)
+            }
+
+
+                
+            .padding([.horizontal, .bottom])
             Spacer()
         }
         .environmentObject(viewModel)

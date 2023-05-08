@@ -9,10 +9,7 @@ import SwiftUI
 import Combine
 
 struct RemoteImage: View {
-    
-    
 
-    
     private enum LoadState {
         case loading, success, failure
     }
@@ -68,6 +65,7 @@ struct RemoteImage: View {
     var body: some View {
         selectImage()
             .resizable()
+            .aspectRatio(contentMode: .fill)
     }
 
     init(singleExperience: ExperienceModel, loading: Image = Image(systemName: "photo"), failure: Image = Image(systemName: "multiply.circle")) {

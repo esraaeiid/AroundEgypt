@@ -31,6 +31,11 @@ class ExperienceViewModel: BaseViewModel, ObservableObject {
     private let stateDidUpdateSubject = PassthroughSubject<ExperienceViewModelState, Never>()
     @Published var singleExperience: ExperienceModel?
     @Published var isLiked: Bool = false
+    @Published var title: String = ""
+    @Published var noOfViews: String = ""
+    @Published var noOfLikes: String = ""
+    @Published var location: String = ""
+    @Published var description: String = ""
 
     public private(set) var hasNext: Bool = false
     private var page = 1
@@ -64,6 +69,19 @@ extension ExperienceViewModel: ExperienceViewModelType {
                 case .success(let experience):
                     
                     self.singleExperience = experience
+                    
+                    switch experience.data {
+                    case .experienceDetails(let experience):
+                        self.title = experience.title ?? ""
+                        self.description = experience.description ?? ""
+                        self.location = "\(experience.city?.name ?? ""), Egypt."
+                        self.noOfViews = "\(experience.viewsNo ?? 0)"
+                        self.noOfLikes = "\(experience.likesNo ?? 0)"
+                    case .int(_):
+                        break
+                    case .none:
+                        break
+                    }
                     self.stateDidUpdateSubject.send(.show(true))
                     
                     
@@ -133,38 +151,7 @@ extension ExperienceViewModel {
 
     //MARK: single experiences
     
-    func loadImage(singleExperience: ExperienceModel){
-        ///Image
-//        switch singleExperience.data {
-//        case .experienceDetails(let experience):
-//            if let url = experience.coverPhoto,
-//               let experienceID = experience.id {
-//                imageLoader = ImageLoader(url: url,
-//                                          photoID: experienceID)
-//            }
-//        case .int(_):
-//            break
-//        case .none:
-//            break
-//        }
-//
-//        guard imageLoader != nil else {
-//            return
-//        }
-//
-//        imageLoader?.$image.sink { [weak self] img in
-//            guard let self = self else { return }
-//
-//            if img != nil {
-//                RunLoop.main.perform {
-//                    self.loadedImage = img ?? UIImage()
-//                    self.imageLoader = nil
-//                }
-//            }
-//
-//        }.store(in: &cancellable)
-    }
-    
+     
     //MARK: like experiences
     
     
