@@ -23,9 +23,11 @@ class HomeCoordinator: Coordinator, CoordinatorProtocol {
 extension HomeCoordinator {
    
     func presentExperience(with id: String){
-        let model = ExperienceModelEnvironmentObject(experienceID: id)
-        let experienceVC = UIHostingController(rootView: ExperienceScreen(model: model))
-        view?.present(experienceVC, animated: true)
+        if Reachability.isConnectedToNetwork() {
+            let model = ExperienceModelEnvironmentObject(experienceID: id)
+            let experienceVC = UIHostingController(rootView: ExperienceScreen(model: model))
+            view?.present(experienceVC, animated: true)
+        }
     }
 
 }
