@@ -12,7 +12,7 @@ AroundEgypt Clone App, for 34ML Technical Exercise.
 Used MVVM, As the business logic is separated from the view, MVVM allows for great optimization and the application of the SRP principle (single responsibility principle). All of this makes the project very testable, which facilitates in reducing and finding bugs.
 
 - Design pattern:
-Ued coordinator desin pattern, to organise flow logic between view controllers.
+Used coordinator desin pattern, to organise flow logic between view controllers.
 
 - Supported iOS verion:
 iOS 14
@@ -26,7 +26,7 @@ iOS 14
  - Swift
  - REST API
  - Caching
- - Combine *(minor use)*
+ - Combine
  - SwiftUI
  - UIKit
  - UITest and UnitTest
