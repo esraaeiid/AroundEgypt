@@ -5,7 +5,7 @@ Your Virtual Tour Guide.
 ## Documentation
 
 - Description:
-AroundEgypt Clone App, for 34ML Technical Exercise.
+AroundEgypt Clone App.
 
 
 - Architecture:
